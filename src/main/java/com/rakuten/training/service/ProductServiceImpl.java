@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rakuten.training.dal.ProductDAO;
+import com.rakuten.training.dal.ProductDAOJpaImpl;
 import com.rakuten.training.domain.Product;
 
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
-	ProductDAO dao; // = new ProductDAOInMemImpl();
+	ProductDAO dao; // = new ProductDAOJpaMemImpl();
+	
+//	private ProductDAO dao = new ProductDAOJpaImpl();
 	
 	@Autowired
 	public void setDao(ProductDAO dao) {
@@ -36,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		if(existing == null) {
 			throw new IllegalArgumentException("product with id "+id+" not found!");
+//			System.out.println("Product doesn't exist. Doin nothin!!");
 		}
 		if(existing.getPrice() * existing.getQoh() >= 100000) {
 			throw new IllegalStateException("Can't delete product when stock >= 100k");

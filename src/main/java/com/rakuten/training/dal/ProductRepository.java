@@ -17,4 +17,8 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 	@Query("select p from Product as p where p.qoh=:q")
 	public List<Product> myComplexQuery(@Param("q") int i);
 	
+	
+//	@Query("select p from Product p where p.review.rating=5")
+//	@Query("select p from Product p,in (p.reviews) r where r.rating=5")
+//	public List<Product> getFiveStarProducts();
 }

@@ -14,7 +14,7 @@ import com.rakuten.training.domain.Product;
 
 @Primary
 @Repository
-//@Transactional
+@Transactional
 public class ProductDAOJpaImpl implements ProductDAO {
 
 	@Autowired
@@ -28,6 +28,7 @@ public class ProductDAOJpaImpl implements ProductDAO {
 
 	@Override
 	public Product findById(int id) {
+//		em.fi
 		Product p = em.find(Product.class, id);
 		
 		return p;
@@ -41,6 +42,10 @@ public class ProductDAOJpaImpl implements ProductDAO {
 
 	@Override
 	public void deleteById(int id) {
+		Query q = em.createQuery("delete from Review r where r.product.id=:pid");
+		q.setParameter("pid", id);
+		int numReviewsDeleted = q.executeUpdate();
+		System.out.println("<<<<< Deleted "+numReviewsDeleted+" reviews before deleting product with id "+id+" >>>>>>");
 		Product p = em.find(Product.class, id);
 		em.remove(p);
 		

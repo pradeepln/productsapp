@@ -16,7 +16,7 @@ import com.rakuten.training.ui.ProductConsoleUI;
 public class ProductsappApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext springContainer = 
+//		ApplicationContext springContainer = 
 				SpringApplication.run(ProductsappApplication.class, args);
 		
 //		String s = "This is a String";
